@@ -1,3 +1,6 @@
+--Drop Database HospitalDB1
+--Create Database HospitalDB1
+
 USE HospitalDB1
 GO
 
@@ -10,17 +13,20 @@ CREATE TABLE [NhanVien] (
 )
 GO
 
+--Changed----------------
 CREATE TABLE [CaTruc] (
-  [Thu] INTEGER,
-  [Ca] VARCHAR(5),
-  PRIMARY KEY ([Thu], [Ca])
+  [Ca] SMALLINT PRIMARY KEY,
+  [GioBatDau] TIME NOT NULL,
+  [GioKetThuc] TIME NOT NULL
 )
+-------------------------
 GO
-
 CREATE TABLE [LamViec] (
   [MaNV] NCHAR(9),
-  [NgayLamViec] INTEGER,
-  [CaLamViec] VARCHAR(5),
+  --Changed-----
+  [NgayLamViec] SMALLINT,
+  [CaLamViec] SMALLINT,
+  --------------
   PRIMARY KEY ([MaNV], [NgayLamViec], [CaLamViec])
 )
 GO
@@ -91,10 +97,10 @@ GO
 
 CREATE TABLE [ChiSo] (
   [MaXN] NCHAR(4) NOT NULL,
-  [TenChiSo] VARCHAR(15) UNIQUE NOT NULL,
+  [TenChiSo] VARCHAR(30) UNIQUE NOT NULL,
   [DonVi] VARCHAR(10) NOT NULL,
   [NguongBT] FLOAT NOT NULL,
-  PRIMARY KEY([MaXN], [TenChiSo], [DonVi], [NguongBT])
+  PRIMARY KEY([MaXN], [TenChiSo])
 )
 GO
 
@@ -104,8 +110,9 @@ CREATE TABLE [ChupPhim] (
 GO
 
 CREATE TABLE [Thuoc] (
-  [Ten] NCHAR(30),
-  [NhaCungCap] NCHAR(30),
+  [Ten] VARCHAR(30),
+  [NhaCungCap] VARCHAR(30),
+  [DonVi] VARCHAR(4) NOT NULL
   PRIMARY KEY ([Ten], [NhaCungCap])
 )
 GO
@@ -122,10 +129,10 @@ GO
 CREATE TABLE [KetQuaXetNghiem] (
   [MaKhamBenh] NCHAR(15) NOT NULL,
   [MaXN] NCHAR(4) NOT NULL,
-  [TenChiSo] VARCHAR(15) UNIQUE NOT NULL,
+  [TenChiSo] VARCHAR(30) NOT NULL,
   [GiaTri] FLOAT NOT NULL,
   [GhiChu] VARCHAR(11) NOT NULL,
-  PRIMARY KEY ([MaKhamBenh], [MaXN], [TenChiSo], [GiaTri], [GhiChu])
+  PRIMARY KEY ([MaKhamBenh], [MaXN], [TenChiSo])
 )
 GO
 
@@ -141,21 +148,20 @@ GO
 CREATE TABLE [ChanDoanHinhAnh] (
   [MaKhamBenh] NCHAR(15) NOT NULL,
   [TenChupPhim] VARCHAR(15) NOT NULL,
-  [CDHA] VARCHAR(30) NOT NULL,
+  [CDHA] VARCHAR(100) NOT NULL,
   PRIMARY KEY ([MaKhamBenh], [TenChupPhim], [CDHA])
 )
 GO
 
 CREATE TABLE [CoKeDon] (
   [MaKhamBenh] NCHAR(15),
-  [TenThuoc] NCHAR(30),
-  [NhaCungCap] NCHAR(30),
+  [TenThuoc] VARCHAR(30),
+  [NhaCungCap] VARCHAR(30),
   [LieuSang] INT,
   [LieuTrua] INT,
   [LieuChieu] INT,
   [LieuToi] INT,
   [SoLuong] INT NOT NULL,
-  [DonVi] VARCHAR(4) NOT NULL,
   PRIMARY KEY ([MaKhamBenh], [TenThuoc], [NhaCungCap])
 )
 GO
@@ -173,7 +179,7 @@ CREATE TABLE [BenhNhan] (
 GO
 
 CREATE TABLE [DiUng] (
-  [MaBN] NCHAR(9),
+  [MaBN] NCHAR(9) NOT NULL,
   [TenDiUng] NCHAR(15) NOT NULL,
   PRIMARY KEY([MaBN], [TenDiUng])
 )
@@ -181,8 +187,8 @@ GO
 
 CREATE TABLE [BenhNhanNoiTru] (
   [CMND] NCHAR(9) PRIMARY KEY,
-  [MaBSChiDinhNV] NCHAR(9) NOT NULL,
-  [MaBSChiDinhXV] NCHAR(9) NOT NULL
+  --[MaBSChiDinhNV] NCHAR(9) NOT NULL,
+  --[MaBSChiDinhXV] NCHAR(9) NOT NULL
 )
 GO
 
@@ -221,14 +227,20 @@ CREATE TABLE [NguoiThan] (
 GO
 
 CREATE TABLE [BenhAnNoiTru] (
-  [MaBN] NCHAR(9) PRIMARY KEY,
+  [MaBenhAn] NCHAR(4),
+  [MaBN] NCHAR(9),
+
+  [MaBSChiDinhNV] NCHAR(9) NOT NULL,
+  [MaBSChiDinhXV] NCHAR(9),
+
   [SoBuong] VARCHAR(6) NOT NULL,
   [SoGiuong] INTEGER NOT NULL,
   [ThoiGianNhapVien] DATETIME NOT NULL,
   [TinhTrangNhapVien] VARCHAR(10) NOT NULL,
   [ThoiGianXuatVien] DATETIME,
   [TinhTrangXuatVien] VARCHAR(10),
-  [GhiChu] VARCHAR(255)
+  [GhiChu] VARCHAR(255),
+  PRIMARY KEY([MaBenhAn], [MaBN])
 )
 GO
 
