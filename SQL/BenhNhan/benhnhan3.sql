@@ -1,23 +1,14 @@
-create or alter proc xem_danh_sach_thuoc_da_dung
+--BN3: Thuoc da dung trong tat ca cac lan dieu tri
+create or alter proc BN3_AllMedicine
 	@cmnd nchar(9)
 as
 begin
-	declare @makhambenh table( makham nchar(15))
-	declare @makham nchar(15)
-	declare @danhsachthuoc table( thuoc varchar(30))
-	insert into @makhambenh select MaKhamBenh from CuocKham where MaBN = @cmnd
-	declare makhamcur cursor for
-	select makham from @makhambenh
-
-	open makhamcur
-	fetch next from makhamcur into @makham
-	while @@FETCH_STATUS = 0
-	begin
-		insert into @danhsachthuoc select TenThuoc from CoKeDon where MaKhamBenh = @makham
-	end
-	select thuoc
-	from @danhsachthuoc
-	group by thuoc
+	SELECT CoKeDon.MaKhamBenh, TenThuoc, NhaCungCap
+	FROM CoKeDon, CuocKham
+	WHERE 
+		CuocKham.MaKhamBenh = CoKeDon.MaKhamBenh
+		AND CuocKham.MaBN = @cmnd
 end
+GO 
 
-
+EXEC BN3_AllMedicine '225600011'
