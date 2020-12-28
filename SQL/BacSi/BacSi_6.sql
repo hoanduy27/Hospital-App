@@ -6,17 +6,20 @@ CREATE OR ALTER PROCEDURE PROC_6
 	@ma_benh_nhan nchar(9)
 AS
 BEGIN
-	SELECT DISTINCT CuocKham.ThoiGianKham, XetNghiem.TenXN
+	IF @ma_benh_nhan IN (SELECT MaBN FROM BenhAnNoiTru)
+		SELECT DISTINCT CuocKham.ThoiGianKham, XetNghiem.TenXN
 
-	FROM XetNghiem INNER JOIN( 
-		CoXetNghiem INNER JOIN CuocKham
-		ON 
-			CuocKham.MaBacSi = @ma_bac_si 
-			AND CuocKham.MaBN = @ma_benh_nhan 
-			AND CuocKham.MaKhamBenh = CoXetNghiem.MaKhamBenh
-		)
-	ON XetNghiem.MaXN = CoXetNghiem.MaXN
+		FROM XetNghiem INNER JOIN( 
+			CoXetNghiem INNER JOIN CuocKham
+			ON 
+				CuocKham.MaBacSi = @ma_bac_si 
+				AND CuocKham.MaBN = @ma_benh_nhan 
+				AND CuocKham.MaKhamBenh = CoXetNghiem.MaKhamBenh
+			)
+		ON XetNghiem.MaXN = CoXetNghiem.MaXN
+	ELSE 
+		PRINT 'KHONG PHAI BENH NHAN NOI TRU'
 END
 GO
 
-EXEC PROC_6 '100000006', '225600001'
+EXEC PROC_6 '100000003', '225600013'
