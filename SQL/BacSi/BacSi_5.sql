@@ -8,7 +8,7 @@ CREATE OR ALTER PROCEDURE PROC_5
 AS
 BEGIN
 	IF @ma_benh_nhan IN (SELECT MaBN FROM BenhAnNoiTru)
-		SELECT DISTINCT CoKeDon.* 
+		SELECT DISTINCT CoKeDon.MaKhamBenh, CoKeDon.TenThuoc, CoKeDon.NhaCungCap
 		FROM CoKeDon INNER JOIN CuocKham
 		ON CuocKham.MaBacSi = @ma_bac_si AND CuocKham.MaBN = @ma_benh_nhan AND CuocKham.MaKhamBenh = CoKeDon.MaKhamBenh;
 	ELSE 
