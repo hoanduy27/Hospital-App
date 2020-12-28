@@ -4,7 +4,7 @@ GO
 ALTER TABLE [LamViec] ADD FOREIGN KEY ([MaNV]) REFERENCES [NhanVien]([MaNV])
 GO
 
-ALTER TABLE [LamViec] ADD FOREIGN KEY ([NgayLamViec], [CaLamViec]) REFERENCES [CaTruc]([Thu],[Ca])
+ALTER TABLE [LamViec] ADD FOREIGN KEY ([CaLamViec]) REFERENCES [CaTruc]([Ca])
 GO
 
 ALTER TABLE [BacSi] ADD FOREIGN KEY ([MaNV]) REFERENCES [NhanVien] ([MaNV])
@@ -19,13 +19,13 @@ GO
 ALTER TABLE [Khoa] ADD FOREIGN KEY ([MaQuanLy]) REFERENCES [BacSi] ([MaNV])
 GO
 
-ALTER TABLE [BacSiChinh] ADD FOREIGN KEY ([MaNV]) REFERENCES [NhanVien] ([MaNV])
+ALTER TABLE [BacSiChinh] ADD FOREIGN KEY ([MaNV]) REFERENCES [BacSi] ([MaNV])
 GO
 
-ALTER TABLE [BacSiXetNghiem] ADD FOREIGN KEY ([MaNV]) REFERENCES [NhanVien] ([MaNV])
+ALTER TABLE [BacSiXetNghiem] ADD FOREIGN KEY ([MaNV]) REFERENCES [BacSi] ([MaNV])
 GO
 
-ALTER TABLE [BacSiChupPhim] ADD FOREIGN KEY ([MaNV]) REFERENCES [NhanVien] ([MaNV])
+ALTER TABLE [BacSiChupPhim] ADD FOREIGN KEY ([MaNV]) REFERENCES [BacSi] ([MaNV])
 GO
 
 ALTER TABLE [CuocKham] ADD FOREIGN KEY ([MaBacSi]) REFERENCES [BacSiChinh] ([MaNV])
@@ -82,10 +82,10 @@ GO
 ALTER TABLE [BenhNhanNoiTru] ADD FOREIGN KEY ([CMND]) REFERENCES [BenhNhan] ([CMND])
 GO
 
-ALTER TABLE [BenhNhanNoiTru] ADD FOREIGN KEY ([MaBSChiDinhNV]) REFERENCES [BacSiChinh] ([MaNV])
+ALTER TABLE [BenhAnNoiTru] ADD FOREIGN KEY ([MaBSChiDinhNV]) REFERENCES [BacSiChinh] ([MaNV])
 GO
 
-ALTER TABLE [BenhNhanNoiTru] ADD FOREIGN KEY ([MaBSChiDinhXV]) REFERENCES [BacSiChinh] ([MaNV])
+ALTER TABLE [BenhAnNoiTru] ADD FOREIGN KEY ([MaBSChiDinhXV]) REFERENCES [BacSiChinh] ([MaNV])
 GO
 
 ALTER TABLE [BenhNhanNgoaiTru] ADD FOREIGN KEY ([CMND]) REFERENCES [BenhNhan] ([CMND])
@@ -123,10 +123,8 @@ GO
 ALTER TABLE [NhanVien] ADD CHECK (NgaySinh < DATEADD(year, -18, CAST(NgayVaoLam as DATE)))
 GO
 
-ALTER TABLE [CaTruc] ADD CHECK (Thu IN (2,3,4,5,6,7,8))
-GO
 
-ALTER TABLE [CaTruc] ADD CHECK (Ca IN ('Sang', 'Chieu', 'Toi'))
+ALTER TABLE [CaTruc] ADD CHECK (Ca IN (1,2,3))
 GO
 
 ALTER TABLE [BacSi] ADD CHECK (HocVi IN ('ChuyenKhoa', 'TienSi', 'ThacSi'))
@@ -144,11 +142,11 @@ GO
 ALTER TABLE [CuocKham] ADD CHECK ((ThoiGianKham) <= GETDATE())
 GO
 
-ALTER TABLE [KhamNoiTru] ADD CHECK (ThoiGianThamKham >= GETDATE())
-GO
+--ALTER TABLE [KhamNoiTru] ADD CHECK (ThoiGianThamKham >= GETDATE())
+--GO
 
-ALTER TABLE [KhamNgoaiTru] ADD CHECK (ThoiGianTaiKham >= GETDATE())
-GO
+--ALTER TABLE [KhamNgoaiTru] ADD CHECK (ThoiGianTaiKham >= GETDATE())
+--GO
 
 ALTER TABLE [KetQuaXetNghiem] ADD CHECK (GhiChu IN ('BinhThuong', 'BatThuong'))
 GO
@@ -156,7 +154,7 @@ GO
 ALTER TABLE [CoKeDon] ADD CHECK (LieuSang + LieuTrua + LieuChieu + LieuToi <= SoLuong)
 GO
 
-ALTER TABLE [CoKeDon] ADD CHECK (DonVi IN ('vien', 'goi', 'ml'))
+ALTER TABLE [Thuoc] ADD CHECK (DonVi IN ('vien', 'goi', 'ml'))
 GO
 
 ALTER TABLE [BenhNhan] ADD CHECK (CMND LIKE '[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]')
