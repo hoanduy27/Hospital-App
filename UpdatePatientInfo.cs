@@ -16,32 +16,28 @@ namespace Hospital
         {
             InitializeComponent();
             lbUpdateError.Hide();
+
         }
 
         private void changeBtn_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(3);
             string bhyt, gioitinh, chieucao, cannang;
             bhyt = bhytBox.Text;
-            if (bhyt.Length != 15 && bhyt.Length != 0) return;
+            if (bhyt.Length != 15 && bhyt.Length != 0)
+            {
+                lbUpdateError.Text = "Mã BHYT 15 ký tự!";
+                lbUpdateError.Show();
+                return;
+            }
             chieucao = heightBox.Text;
             if (chieucao == "") chieucao = "0";
-            /* Key press event listener has been handled */
-            //foreach (Char c in chieucao)
-            //{
-            //    if (!Char.IsDigit(c))
-            //        return;
-            //}
             cannang = weightBox.Text;
             if (cannang == "") cannang = "0";
-            /* Key press event listener has been handled */
-            //foreach (Char c in cannang)
-            //{
-            //    if (!Char.IsDigit(c))
-            //        return;
-            //}
             if (sexCbx.Text == "Nam") gioitinh = "M";
             else gioitinh = "F";
             string query = "EXEC BN1_UpdatePatientInfo '" + IdKeeper.ID.Get() + "','" + bhyt + "','" + gioitinh + "'," + chieucao + ", " + cannang;
+            Console.WriteLine("GO");
             try
             {
                 ADO.DataProvider.Instance.executeQuery(query);
@@ -76,5 +72,6 @@ namespace Hospital
                 e.Handled = true;
             }
         }
+
     }
 }
