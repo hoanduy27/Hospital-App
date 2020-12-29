@@ -18,7 +18,7 @@ BEGIN
 			)
 		ON XetNghiem.MaXN = CoXetNghiem.MaXN
 	ELSE 
-		PRINT 'KHONG PHAI BENH NHAN NOI TRU'
+		SELECT 'Failed!!!'
 END
 GO
 
