@@ -12,7 +12,7 @@ BEGIN
 		FROM CoKeDon INNER JOIN CuocKham
 		ON CuocKham.MaBacSi = @ma_bac_si AND CuocKham.MaBN = @ma_benh_nhan AND CuocKham.MaKhamBenh = CoKeDon.MaKhamBenh;
 	ELSE 
-		PRINT 'KHONG PHAI BENH NHAN NOI TRU';
+		SELECT 'Failed!!!'
 END
 GO
 
