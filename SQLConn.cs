@@ -60,6 +60,14 @@ namespace Hospital
                     lbErrorLogin.Hide();
                     this.Show();
                 }
+                else
+                {
+                    bacsi bs = new bacsi();
+                    this.Hide();
+                    bs.ShowDialog();
+                    lbErrorLogin.Hide();
+                    this.Show();
+                }
                 IdKeeper.ID.Delete();
             }
             catch (Exception E)

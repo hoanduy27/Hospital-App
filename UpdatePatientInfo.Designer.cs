@@ -30,6 +30,7 @@ namespace Hospital
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.lbUpdateError = new System.Windows.Forms.Label();
             this.sexCbx = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@ namespace Hospital
             this.label11 = new System.Windows.Forms.Label();
             this.heightBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.cancelBtn = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,17 @@ namespace Hospital
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(362, 423);
             this.panel4.TabIndex = 20;
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelBtn.Location = new System.Drawing.Point(182, 354);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(159, 49);
+            this.cancelBtn.TabIndex = 21;
+            this.cancelBtn.Text = "Hủy";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // lbUpdateError
             // 
@@ -110,6 +121,7 @@ namespace Hospital
             this.weightBox.Size = new System.Drawing.Size(333, 22);
             this.weightBox.TabIndex = 18;
             this.weightBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weightBox_KeyPress);
+
             // 
             // changeBtn
             // 
@@ -172,6 +184,7 @@ namespace Hospital
             this.heightBox.Size = new System.Drawing.Size(333, 22);
             this.heightBox.TabIndex = 16;
             this.heightBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.heightBox_KeyPress);
+            
             // 
             // label3
             // 
@@ -183,17 +196,6 @@ namespace Hospital
             this.label3.Size = new System.Drawing.Size(76, 21);
             this.label3.TabIndex = 13;
             this.label3.Text = "Giới tính";
-            // 
-            // cancelBtn
-            // 
-            this.cancelBtn.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelBtn.Location = new System.Drawing.Point(182, 354);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(159, 49);
-            this.cancelBtn.TabIndex = 21;
-            this.cancelBtn.Text = "Hủy";
-            this.cancelBtn.UseVisualStyleBackColor = true;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // UpdatePatientInfo
             // 
